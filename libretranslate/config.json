@@ -18,12 +18,12 @@
     "languages": "en,es,de,fr,it,zh",
     "debug": false
   },
-  "schema": [
-    {"name": "host", "required": true, "type": "string"},
-    {"name": "port", "required": true, "type": "integer"},
-    {"name": "languages", "required": true, "type": "string"},
-    {"name": "debug", "required": true, "type": "bool"}
-  ],
+  "schema": {
+    "host": {"type": "string", "required": true},
+    "port": {"type": "integer", "required": true},
+    "languages": {"type": "string", "required": true},
+    "debug": {"type": "bool", "required": true}
+  },
   "arch": ["amd64"],
   "image": "libretranslate/libretranslate"
 }
