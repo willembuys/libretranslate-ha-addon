@@ -1,0 +1,70 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# LibreTranslate s6 Service
+# ==============================================================================
+
+set -e
+
+# Logging helper
+log() {
+    if bashio::config.has_value 'host' >/dev/null 2>&1; then
+        bashio::log.info "$1"
+    else
+        echo "$1"
+    fi
+}
+
+# Konfiguration aus bashio oder ENV
+if bashio::config.has_value 'host' >/dev/null 2>&1; then
+    HOST="$(bashio::config 'host')"
+    PORT="$(bashio::config 'port')"
+    LANGUAGES="$(bashio::config 'languages')"
+    DEBUG="$(bashio::config 'debug')"
+else
+    HOST="${HOST:-0.0.0.0}"
+    PORT="${PORT:-5000}"
+    LANGUAGES="${LANGUAGES:-en,es,de,fr,it,zh}"
+    DEBUG="${DEBUG:-false}"
+fi
+
+log "LibreTranslate add-on starting"
+log "Host=${HOST} Port=${PORT} Languages='${LANGUAGES}' Debug=${DEBUG}"
+
+MODELS_DIR="/share/libretranslate/models"
+mkdir -p "$MODELS_DIR"
+
+# Prüfen und ggf. fehlende Modelle herunterladen
+MISSING=false
+IFS=',' read -ra LANG_LIST <<< "$LANGUAGES"
+for lang in "${LANG_LIST[@]}"; do
+    lang_trimmed="$(echo "$lang" | xargs)"
+    if [ -z "$lang_trimmed" ]; then
+        continue
+    fi
+    if [ ! -d "$MODELS_DIR/$lang_trimmed" ]; then
+        log "Missing model for: $lang_trimmed"
+        MISSING=true
+    else
+        log "Model exists for: $lang_trimmed"
+    fi
+done
+
+if [ "$MISSING" = true ]; then
+    log "Downloading missing models..."
+    if [ "$DEBUG" = true ] || [ "$DEBUG" = "true" ]; then
+        libretranslate --update-models --models-dir "$MODELS_DIR" --debug
+    else
+        libretranslate --update-models --models-dir "$MODELS_DIR"
+    fi
+else
+    log "All configured models present"
+fi
+
+log "Starting LibreTranslate (foreground) on ${HOST}:${PORT}"
+
+# Start im Vordergrund für s6
+if [ "$DEBUG" = true ] || [ "$DEBUG" = "true" ]; then
+    exec libretranslate --host "${HOST}" --port "${PORT}" --models-dir "${MODELS_DIR}" --load-only "${LANGUAGES}" --debug
+else
+    exec libretranslate --host "${HOST}" --port "${PORT}" --models-dir "${MODELS_DIR}" --load-only "${LANGUAGES}"
+fi
