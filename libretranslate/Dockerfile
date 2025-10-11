@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Systemabhängigkeiten installieren
 RUN apk update && apk upgrade
-RUN apk add python3 py3-pip icu-dev qtbase5-dev
+RUN apk add python3 py3-pip icu-dev qt5-qtbase-dev
 
 
 # Virtuelle Umgebung
