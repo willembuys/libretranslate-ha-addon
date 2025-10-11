@@ -4,7 +4,7 @@ Dieses Repository enthält das Add-on `LibreTranslate` für Home Assistant OS / 
 1. Gehe in Home Assistant zu **Einstellungen → Add-ons → Add-on Store**
 2. Klicke oben rechts auf **⋮ → Repositories hinzufügen**
 3. Gib die URL dieses Repositories ein:
-   https://github.com/deinuser/libretranslate-ha-addon
+   https://github.com/binbashmedium/libretranslate-ha-addon/
 4. Klicke auf „Hinzufügen“ → scrolle nach unten zu **Lokale Add-ons** → LibreTranslate erscheint
 5. Add-on installieren und starten
 ## Hinweise
