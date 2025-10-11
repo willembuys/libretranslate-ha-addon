@@ -1,5 +1,6 @@
 # ===== Build stage =====
 FROM python:3.11.11-slim-bullseye AS builder
+RUN git clone --depth 1 https://github.com/LibreTranslate/LibreTranslate.git /app
 
 WORKDIR /app
 
