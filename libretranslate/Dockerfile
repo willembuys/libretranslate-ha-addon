@@ -20,7 +20,8 @@ ENV PATH="/opt/venv/bin:$PATH"
 # Pip aktualisieren
 RUN pip install --upgrade pip
 
-RUN ls
+RUN echo "Contents of /app:" && ls -al /app
+
 RUN pip install -r requirements.txt
 
 
