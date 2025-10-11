@@ -1,34 +1,34 @@
-# LibreTranslate Add-on für Home Assistant
 ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base:latest
 FROM $BUILD_FROM
 
 WORKDIR /app
 
-# ==== Systemabhängigkeiten installieren ====
+# Systemabhängigkeiten für pip + LibreTranslate
 RUN apk add --no-cache \
     python3 \
     py3-pip \
     py3-virtualenv \
     g++ \
     make \
-    cmake \
-    qt5-qtbase-dev \
-    qt5-qttools-dev \
-    py3-pyqt5 \
-    py3-sip \
     bash \
-    git
+    git \
+    build-base \
+    libffi-dev \
+    musl-dev \
+    cargo \
+    cmake
 
-# ==== Virtuelle Umgebung für Python einrichten ====
+# Virtuelle Umgebung
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# ==== Python-Abhängigkeiten installieren ====
-# --break-system-packages optional, falls keine venv aktiv
-RUN pip install --no-cache-dir --upgrade pip setuptools wheel
-RUN pip install --no-cache-dir libretranslate argostranslate
+# Pip updaten
+RUN pip install --upgrade pip setuptools wheel
 
-# ==== Startskript hinzufügen ====
+# LibreTranslate + ArgosTranslate installieren (inklusive PyQt5 via pip)
+RUN pip install --no-cache-dir libretranslate argostranslate PyQt5-sip PyQt5
+
+# Startskript
 COPY run.sh /run.sh
 RUN chmod +x /run.sh
 
