@@ -21,4 +21,5 @@ schema:
   debug: bool
 arch:
   - amd64
-image: libretranslate/libretranslate
+build: .
+
