@@ -3,12 +3,11 @@ set -e
 
 echo "run.sh gestartet"
 
-# Standardwerte aus HA options
+# Optionen aus HA
 HOST="${HOST:-0.0.0.0}"
 PORT="${PORT:-5000}"
 LANGUAGES="${LANGUAGES:-en,es,de,fr,it,zh}"
 DEBUG="${DEBUG:-false}"
-WEBUI="${WEBUI:-true}"
 MODELS_DIR="/share/libretranslate/models"
 
 echo "Konfiguration:"
@@ -17,12 +16,11 @@ echo "Port: $PORT"
 echo "Sprachen: $LANGUAGES"
 echo "Models directory: $MODELS_DIR"
 echo "Debug: $DEBUG"
-echo "WebUI: $WEBUI"
 
-# Modelle persistent speichern
+# Persistente Modelle
 mkdir -p "$MODELS_DIR"
 
-# Prüfen, ob Modelle existieren
+# Prüfen auf fehlende Modelle
 MISSING_MODELS=false
 for lang in $(echo $LANGUAGES | tr ',' ' '); do
   if [ ! -d "$MODELS_DIR/$lang" ]; then
@@ -31,7 +29,7 @@ for lang in $(echo $LANGUAGES | tr ',' ' '); do
   fi
 done
 
-# Modelle herunterladen, falls nötig
+# Modelle laden, falls nötig
 if [ "$MISSING_MODELS" = true ]; then
     echo "Lade fehlende Sprachmodelle"
     libretranslate --update-models --models-dir "$MODELS_DIR" $( [ "$DEBUG" = true ] && echo "--debug" )
@@ -39,19 +37,11 @@ else
     echo "Alle Modelle vorhanden"
 fi
 
-echo "Starte LibreTranslate"
-
-# WebUI Flag setzen
-WEBUI_FLAG=""
-if [ "$WEBUI" != true ]; then
-  WEBUI_FLAG="--disable-web-ui"
-fi
-
+echo "Starte LibreTranslate mit Ingress"
 exec libretranslate \
     --host "$HOST" \
     --port "$PORT" \
     --languages "$LANGUAGES" \
     --models-dir "$MODELS_DIR" \
     --load-only "" \
-    $WEBUI_FLAG \
     $( [ "$DEBUG" = true ] && echo "--debug" )
