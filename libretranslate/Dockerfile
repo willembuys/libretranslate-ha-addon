@@ -22,7 +22,7 @@ RUN pip install --upgrade pip
 
 RUN echo "Contents of /app:" && ls -al /app
 
-RUN pip install -r requirements.txt
+#RUN pip install -r requirements.txt
 
 
 # Übersetzungen kompilieren
