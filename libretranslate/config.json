@@ -5,6 +5,9 @@
   "description": "Selbstgehosteter LibreTranslate-Server für Home Assistant, komplett offline.",
   "startup": "services",
   "boot": "auto",
+  "ingress": true,
+  "panel_icon": "mdi:translate",
+  "panel_title": "LibreTranslate",
   "ports": {
     "5000/tcp": 5000
   },
@@ -13,15 +16,13 @@
     "host": "0.0.0.0",
     "port": 5000,
     "languages": "en,es,de,fr,it,zh",
-    "debug": false,
-    "webui": true
+    "debug": false
   },
   "schema": [
     {"name": "host", "required": true, "type": "string"},
     {"name": "port", "required": true, "type": "integer"},
     {"name": "languages", "required": true, "type": "string"},
-    {"name": "debug", "required": true, "type": "bool"},
-    {"name": "webui", "required": true, "type": "bool"}
+    {"name": "debug", "required": true, "type": "bool"}
   ],
   "arch": ["amd64"],
   "image": "libretranslate/libretranslate"
