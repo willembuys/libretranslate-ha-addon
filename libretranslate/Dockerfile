@@ -3,7 +3,7 @@ FROM $BUILD_FROM
 
 WORKDIR /app
 
-# Systemabhängigkeiten für pip + LibreTranslate
+# Systemabhängigkeiten
 RUN apk add --no-cache \
     python3 \
     py3-pip \
@@ -15,18 +15,18 @@ RUN apk add --no-cache \
     build-base \
     libffi-dev \
     musl-dev \
-    cargo \
-    cmake
+    cmake \
+    cargo
 
 # Virtuelle Umgebung
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Pip updaten
+# Pip upgraden
 RUN pip install --upgrade pip setuptools wheel
 
-# LibreTranslate + ArgosTranslate installieren (inklusive PyQt5 via pip)
-RUN pip install --no-cache-dir libretranslate argostranslate PyQt5-sip PyQt5
+# LibreTranslate + ArgosTranslate (ohne PyQt5)
+RUN pip install --no-cache-dir libretranslate argostranslate
 
 # Startskript
 COPY run.sh /run.sh
