@@ -1,19 +1,18 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base:15.0.6
+ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base:15.0.6
 FROM $BUILD_FROM
 
-# Arbeitsverzeichnis
 WORKDIR /app
 
-# Minimal: python + pip (base image hat apk)
 RUN apk add --no-cache python3 py3-pip
 
-# Installiere LibreTranslate (und Argos falls benötigt)
+# Virtuelle Umgebung erstellen und aktivieren
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
 RUN pip install --no-cache-dir libretranslate argostranslate
 
-# Kopiere Startskript
 COPY run.sh /run.sh
 RUN chmod +x /run.sh
 
 EXPOSE 5000
-
 CMD ["/run.sh"]
