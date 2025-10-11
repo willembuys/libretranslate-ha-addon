@@ -1,11 +1,6 @@
-# ==========================
-# LibreTranslate HA Add-on Dockerfile
-# ==========================
-
 ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base-debian:latest
 FROM $BUILD_FROM
 
-# Arbeitsverzeichnis
 WORKDIR /app
 
 # Systemabhängigkeiten installieren
@@ -27,20 +22,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Virtuelle Umgebung für Python
+# Virtuelle Umgebung
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# LibreTranslate & Argos Translate installieren
-RUN pip install --no-cache-dir --upgrade pip
-RUN pip install --no-cache-dir libretranslate argostranslate PyQt5-sip PyQt5
+# Python-Pakete
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir libretranslate argostranslate PyQt5 PyQt5-sip
 
-# Startskript kopieren und ausführbar machen
+# Startskript
 COPY run.sh /run.sh
 RUN chmod +x /run.sh
 
-# Exponierter Port für WebUI/API
 EXPOSE 5000
-
-# Startbefehl
 CMD ["/run.sh"]
