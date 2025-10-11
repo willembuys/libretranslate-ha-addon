@@ -1,11 +1,11 @@
-ARG BUILD_FROM=python:3.11.11-slim-bullseye AS builder
+ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base-debian:latest
 FROM $BUILD_FROM
 
 # Arbeitsverzeichnis
 WORKDIR /app
 
 # Systemabhängigkeiten installieren
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apk update && apk add  \
     python3 \
     python3-venv \
     python3-pip \
@@ -15,9 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     bash \
     pkg-config \
-    g++ \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    g++
 
 # LibreTranslate klonen
 RUN git clone --depth 1 https://github.com/LibreTranslate/LibreTranslate.git /app
