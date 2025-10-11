@@ -28,12 +28,5 @@ RUN echo "Contents of /app:" && ls -al /app
 # Übersetzungen kompilieren
 #RUN python scripts/compile_locales.py
 
-# Run-Skript kopieren und ausführbar machen
-COPY run.sh /run.sh
-RUN chmod +x /run.sh
-
-# Ports freigeben
-EXPOSE 5000
-
-# Add-on Start
-CMD ["/run.sh"]
+# Copy root filesystem
+COPY rootfs /
