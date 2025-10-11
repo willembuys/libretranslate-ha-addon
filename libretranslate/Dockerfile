@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base-debian:latest
+ARG BUILD_FROM=python:3.11.11-slim-bullseye AS builder
 FROM $BUILD_FROM
 
 # Arbeitsverzeichnis
