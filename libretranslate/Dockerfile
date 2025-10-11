@@ -5,7 +5,7 @@ FROM $BUILD_FROM
 WORKDIR /app
 
 # Systemabhängigkeiten installieren
-RUN  apk update && sudo apk upgrade
+RUN apk update && apk upgrade
 RUN apk add python3 py3-pip
 RUN apk add git
 
