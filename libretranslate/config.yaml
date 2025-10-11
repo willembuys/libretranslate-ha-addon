@@ -24,3 +24,5 @@ schema:
   debug: bool?
 arch:
   - amd64
+init: false
+
