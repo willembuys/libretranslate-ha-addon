@@ -5,8 +5,13 @@
   "description": "Selbstgehosteter LibreTranslate-Server für Home Assistant, komplett offline.",
   "startup": "services",
   "boot": "auto",
-  "ports": {"5000/tcp": 5000},
-  "map": ["config:rw", "share:rw"],
+  "ports": {
+    "5000/tcp": 5000
+  },
+  "map": [
+    "config:rw",
+    "share:rw"
+  ],
   "options": {
     "host": "0.0.0.0",
     "port": 5000,
