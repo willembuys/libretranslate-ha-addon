@@ -29,11 +29,11 @@ RUN echo "Contents of /app:" && ls -al /app
 #RUN python scripts/compile_locales.py
 
 # Run-Skript kopieren und ausführbar machen
-#COPY run.sh /run.sh
-#RUN chmod +x /run.sh
+COPY run.sh /run.sh
+RUN chmod +x /run.sh
 
 # Ports freigeben
 EXPOSE 5000
 
 # Add-on Start
-#CMD ["/run.sh"]
+CMD ["/run.sh"]
