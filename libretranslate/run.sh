@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-
+ls -l /app/
 # Lade bashio helper
 if [ -f /usr/lib/bashio/bashio.sh ]; then
   source /usr/lib/bashio/bashio.sh
