@@ -1,6 +1,6 @@
 {
   "name": "LibreTranslate",
-  "version": "1.0.0",
+  "version": "latest",
   "slug": "libretranslate",
   "description": "Selbstgehosteter LibreTranslate-Server für Home Assistant, komplett offline.",
   "startup": "services",
