@@ -20,7 +20,8 @@ ENV PATH="/opt/venv/bin:$PATH"
 # Pip aktualisieren
 RUN pip install --upgrade pip
 
-RUN pip install -r LibreTranslate/requirements.txt
+RUN ls
+RUN pip install -r requirements.txt
 
 
 # Übersetzungen kompilieren
