@@ -10,7 +10,7 @@ panel_title: LibreTranslate
 ports:
   5000/tcp: 5000
 map:
-  - share
+  - share:rw
 build: .
 options:
   host: "0.0.0.0"
@@ -25,4 +25,5 @@ schema:
 arch:
   - amd64
 init: false
+
 
