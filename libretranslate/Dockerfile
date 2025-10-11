@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Systemabhängigkeiten installieren
 RUN apk update && apk upgrade
-RUN apk add python3 py3-pip icu-dev qt5-qtbase-dev
+RUN apk add python3 py3-pip icu-dev qt5-qtbase-dev g++ make
 
 RUN pip install libretranslate
 
