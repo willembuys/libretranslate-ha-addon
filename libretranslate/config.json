@@ -1,5 +1,5 @@
 {
-  "name": "LibreTranslate (lokal)",
+  "name": "LibreTranslate",
   "version": "1.0.0",
   "slug": "libretranslate",
   "description": "Selbstgehosteter LibreTranslate-Server für Home Assistant, komplett offline.",
@@ -10,5 +10,5 @@
   "options": {"host": "0.0.0.0", "port": 5000, "load_only": ""},
   "schema": {"host": "str", "port": "int", "load_only": "str"},
   "arch": ["amd64"],
-  "image": "libretranslate/libretranslate"
+  "image": "libretranslate/libretranslate:latest"
 }
