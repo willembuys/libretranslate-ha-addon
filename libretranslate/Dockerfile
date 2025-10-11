@@ -8,14 +8,6 @@ WORKDIR /app
 RUN apk update && apk upgrade
 RUN apk add python3 py3-pip icu-dev qt5-qtbase-dev
 
-
-# Virtuelle Umgebung
-RUN python3 -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-
-# Pip aktualisieren
-RUN pip install --upgrade pip
-
 RUN pip install libretranslate
 
 # Copy root filesystem
