@@ -20,19 +20,19 @@ ENV PATH="/opt/venv/bin:$PATH"
 # Pip aktualisieren
 RUN pip install --upgrade pip
 
-RUN ls -l /app
-RUN pip install -r /app/LibreTranslate/requirements.txt
+#RUN ls -l /app
+#RUN pip install -r /app/LibreTranslate/requirements.txt
 
 
 # Übersetzungen kompilieren
-RUN python scripts/compile_locales.py
+#RUN python scripts/compile_locales.py
 
 # Run-Skript kopieren und ausführbar machen
-COPY run.sh /run.sh
-RUN chmod +x /run.sh
+#COPY run.sh /run.sh
+#RUN chmod +x /run.sh
 
 # Ports freigeben
 EXPOSE 5000
 
 # Add-on Start
-CMD ["/run.sh"]
+#CMD ["/run.sh"]
