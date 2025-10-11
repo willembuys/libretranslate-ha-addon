@@ -6,9 +6,17 @@
   "startup": "services",
   "boot": "auto",
   "ports": {"5000/tcp": 5000},
-  "map": ["share"],
-  "options": {"host": "0.0.0.0", "port": 5000, "load_only": ""},
-  "schema": {"host": "str", "port": "int", "load_only": "str"},
+  "map": ["config:rw", "share:rw"],
+  "options": {
+    "host": "0.0.0.0",
+    "port": 5000,
+    "languages": "en,es,de,fr,it,zh"
+  },
+  "schema": {
+    "host": "str",
+    "port": "int",
+    "languages": "str"
+  },
   "arch": ["amd64"],
   "image": "libretranslate/libretranslate"
 }
