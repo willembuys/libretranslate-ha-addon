@@ -5,17 +5,9 @@ FROM $BUILD_FROM
 WORKDIR /app
 
 # Systemabhängigkeiten installieren
-RUN apk update && apk add  \
-    python3 \
-    python3-venv \
-    python3-pip \
-    build-essential \
-    git \
-    wget \
-    curl \
-    bash \
-    pkg-config \
-    g++
+RUN  apk update && sudo apk upgrade
+RUN apk add python3 py3-pip
+RUN apk add git
 
 # LibreTranslate klonen
 RUN git clone --depth 1 https://github.com/LibreTranslate/LibreTranslate.git /app
@@ -24,16 +16,12 @@ RUN git clone --depth 1 https://github.com/LibreTranslate/LibreTranslate.git /ap
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
+
 # Pip aktualisieren
 RUN pip install --upgrade pip
 
-# Python-Abhängigkeiten installieren
-RUN pip install --no-cache-dir \
-    Babel==2.12.1 \
-    torch==2.2.0 --extra-index-url https://download.pytorch.org/whl/cpu \
-    "numpy<2" \
-    argostranslate \
-    libretranslate
+RUN pip install -r /app/requirements.txt
+
 
 # Übersetzungen kompilieren
 RUN python scripts/compile_locales.py
