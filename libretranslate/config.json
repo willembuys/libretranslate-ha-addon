@@ -19,10 +19,10 @@
     "debug": false
   },
   "schema": {
-    "host": {"type": "str", "required": "true"},
-    "port": {"type": "int", "required": "true"},
-    "languages": {"type": "str", "required": "true"},
-    "debug": {"type": "bool", "required": "true"}
+    "host": {"type": "str"},
+    "port": {"type": "int"},
+    "languages": {"type": "str"},
+    "debug": {"type": "bool"}
   },
   "arch": ["amd64"],
   "image": "libretranslate/libretranslate"
