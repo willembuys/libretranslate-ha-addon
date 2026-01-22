@@ -1,7 +1,7 @@
 name: LibreTranslate
 version: "0.0.1"
 slug: libretranslate
-description: Selbstgehosteter LibreTranslate-Server für Home Assistant, komplett offline.
+description: Self-hosted LibreTranslate-Server for Home Assistant OS.
 startup: services
 boot: auto
 ingress: true
@@ -24,6 +24,9 @@ schema:
   debug: bool?
 arch:
   - amd64
+  - armv7
+  - arm64
 init: false
+
 
 
