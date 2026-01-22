@@ -1,5 +1,5 @@
-ARG BUILD_FROM
-FROM ghcr.io/hassio-addons/base:19.0.0
+ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/amd64:7.8.3
+FROM ${BUILD_FROM}
 
 # Set working directory
 WORKDIR /app
