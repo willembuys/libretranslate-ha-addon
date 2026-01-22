@@ -8,9 +8,7 @@ ENV LT_HOST=0.0.0.0 \
 
 # Prepare a persistent model directory and symlink Argos models to /share
 # (Home Assistant maps /share as persistent storage for add-ons).
-RUN mkdir -p /share/libretranslate/models \
-    && mkdir -p /root/.local/share /root/.local/cache \
-    && ln -s /share/libretranslate/models /root/.local/share/argos-translate
+RUN mkdir -p /root/.local/share /root/.local/cache
 
 # Copy launcher
 COPY rootfs /
