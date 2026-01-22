@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM ghcr.io/hassio-addons/base:19.0.0
 
 # Set working directory
 WORKDIR /app
