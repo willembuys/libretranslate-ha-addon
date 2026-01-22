@@ -1,5 +1,5 @@
 ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base-debian:latest
-FROM ${BUILD_FROM}
+FROM libretranslate/libretranslate:latest
 
 ENV DEBIAN_FRONTEND=noninteractive \
     LT_HOST=0.0.0.0 \
