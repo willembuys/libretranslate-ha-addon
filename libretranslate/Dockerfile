@@ -1,5 +1,12 @@
-ARG BUILD_FROM
+ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base-debian:latest
 FROM ${BUILD_FROM}
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    LT_HOST=0.0.0.0 \
+    LT_PORT=5000 \
+    PYTHONUNBUFFERED=1 \
+    HOME=/root \
+    LT_VENV=/opt/lt
 
 # Set working directory
 WORKDIR /app
@@ -17,7 +24,7 @@ RUN apt-get update && \
       rm -rf /var/lib/apt/lists/*
 
 # Install LibreTranslate
-RUN pip3 install libretranslate
+RUN pip3 install --no-cache-dir --break-system-packages libretranslate
 
 # Copy root filesystem
 COPY rootfs /
