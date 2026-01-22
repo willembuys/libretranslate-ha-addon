@@ -1,30 +1,25 @@
 ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base-debian:latest
 FROM libretranslate/libretranslate:latest
 
-ENV DEBIAN_FRONTEND=noninteractive \
-    LT_HOST=0.0.0.0 \
+# Environment used by our launcher
+ENV LT_HOST=0.0.0.0 \
     LT_PORT=5000 \
-    PYTHONUNBUFFERED=1 \
-    HOME=/root \
-    LT_VENV=/opt/lt
+    HOME=/root
 
-# Set working directory
-WORKDIR /app
+# Prepare a persistent model directory and symlink Argos models to /share
+# (Home Assistant maps /share as persistent storage for add-ons).
+RUN mkdir -p /share/libretranslate/models \
+    && mkdir -p /root/.local/share /root/.local/cache \
+    && ln -s /share/libretranslate/models /root/.local/share/argos-translate
 
-# Install system dependencies required by LibreTranslate / Argos Translate
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        python3 \
-        python3-pip \
-        python3-dev \
-        python3-venv \
-        build-essential \
-        libicu-dev \
-        curl && \
-      rm -rf /var/lib/apt/lists/*
-
-# Install LibreTranslate
-RUN pip3 install --no-cache-dir --break-system-packages libretranslate
-
-# Copy root filesystem
+# Copy launcher
 COPY rootfs /
+
+# Ensure our launcher is executable
+RUN chmod +x /usr/bin/run.sh
+
+# Expose API
+EXPOSE 5000
+
+# Start LibreTranslate via our launcher, which reads /data/options.json
+CMD ["/usr/bin/run.sh"]
