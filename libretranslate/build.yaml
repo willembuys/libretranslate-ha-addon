@@ -1,12 +1,9 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
 build_from:
-  aarch64: "ghcr.io/hassio-addons/debian-base/aarch64:latest"
-  amd64: "ghcr.io/hassio-addons/debian-base/amd64:latest"
-  armhf: "ghcr.io/hhassio-addons/debian-base/armhf:latest"
-  armv7: "ghcr.io/hassio-addons/debian-base/armv7:latest"
-  i386: "ghcr.io/hassio-addons/debian-base/i386:latest"
+  aarch64: "ghcr.io/home-assistant/aarch64-base-debian:latest"
+  amd64: "ghcr.io/home-assistant/amd64-base-debian:latest"
 labels:
-  org.opencontainers.image.title: "Home Assistant Add-on: Example add-on"
-  org.opencontainers.image.description: "Example add-on to use as a blueprint for new add-ons."
+  org.opencontainers.image.title: "Home Assistant Add-on: LibreTranslate"
+  org.opencontainers.image.description: "Install LibreTranslate on your Home Assistant OS."
   org.opencontainers.image.source: "https://github.com/home-assistant/addons-example"
   org.opencontainers.image.licenses: "Apache License 2.0"
