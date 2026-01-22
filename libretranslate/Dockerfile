@@ -1,16 +1,25 @@
-ARG $BUILD_FROM
+ARG BUILD_FROM
 FROM $BUILD_FROM
 
-# Arbeitsverzeichnis
+# Set working directory
 WORKDIR /app
 
-# Systemabhängigkeiten installieren
-# RUN apk update && apk upgrade
-RUN apk add python3 py3-pip icu-dev g++ make
-# RUN apk add python3 py3-pip icu-dev qt5-qtbase-dev g++ make py3-qt5 pyqt5-dev
-# currently not working: PyQt5 cant be installed
-# RUN pip install PyQt5==5.15.4 --config-settings --confirm-license= --verbose
-RUN pip install libretranslate
+# Install system dependencies required by LibreTranslate / Argos Translate
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        python3 \
+        python3-pip \
+        python3-dev \
+        build-essential \
+        libicu-dev \
+        ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Upgrade pip to avoid resolver errors
+RUN python3 -m pip install --upgrade pip
+
+# Install LibreTranslate
+RUN pip3 install libretranslate
 
 # Copy root filesystem
 COPY rootfs /
