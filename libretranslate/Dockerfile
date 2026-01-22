@@ -6,10 +6,6 @@ ENV LT_HOST=0.0.0.0 \
     LT_PORT=5000 \
     HOME=/root
 
-# Prepare a persistent model directory and symlink Argos models to /share
-# (Home Assistant maps /share as persistent storage for add-ons).
-RUN mkdir -p /root/.local/share /root/.local/cache
-
 # Copy launcher
 COPY rootfs /
 
