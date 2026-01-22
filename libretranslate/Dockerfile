@@ -15,9 +15,6 @@ RUN apt-get update && \
         ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# Upgrade pip to avoid resolver errors
-RUN python3 -m pip install --upgrade pip
-
 # Install LibreTranslate
 RUN pip3 install libretranslate
 
