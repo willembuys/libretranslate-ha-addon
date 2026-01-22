@@ -10,10 +10,11 @@ RUN apt-get update && \
         python3 \
         python3-pip \
         python3-dev \
+        python3-venv \
         build-essential \
         libicu-dev \
-        ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+        curl && \
+      rm -rf /var/lib/apt/lists/*
 
 # Install LibreTranslate
 RUN pip3 install libretranslate
