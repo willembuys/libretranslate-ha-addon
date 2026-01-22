@@ -24,9 +24,9 @@ schema:
   debug: bool?
 arch:
   - amd64
-  - armv7
-  - arm64
+  - aarch64
 init: false
+
 
 
 
