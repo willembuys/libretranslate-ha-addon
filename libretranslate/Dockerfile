@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/amd64:7.8.3
+ARG BUILD_FROM
 FROM ${BUILD_FROM}
 
 # Set working directory
