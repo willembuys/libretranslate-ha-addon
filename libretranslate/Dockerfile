@@ -10,10 +10,10 @@ ENV LT_HOST=0.0.0.0 \
 COPY rootfs /
 
 # Ensure our launcher is executable
-RUN chmod +x /usr/bin/run.sh
+# RUN chmod +x /usr/bin/run.sh
 
 # Expose API
 EXPOSE 5000
 
 # Start LibreTranslate via our launcher, which reads /data/options.json
-CMD ["/usr/bin/run.sh"]
+# CMD ["/usr/bin/run.sh"]
